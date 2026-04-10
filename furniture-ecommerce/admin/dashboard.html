@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — FURNI Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+  <!-- ── Sidebar ─────────────────────────────────────────── -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">◈</span> FURNI
+      <span style="font-size:.65rem; color:rgba(255,255,255,.4); margin-left:.5rem; font-family:var(--font-body); font-weight:400; letter-spacing:0">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-link">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="dashboard.html#products" class="admin-nav-link">
+        <span class="nav-icon">🪑</span> Products
+      </a>
+      <a href="add-product.html" class="admin-nav-link">
+        <span class="nav-icon">➕</span> Add Product
+      </a>
+      <a href="orders.html" class="admin-nav-link">
+        <span class="nav-icon">📦</span> Orders
+      </a>
+      <a href="users.html" class="admin-nav-link">
+        <span class="nav-icon">👥</span> Users
+      </a>
+      <div style="border-top:1px solid rgba(255,255,255,.08); margin:.75rem 0"></div>
+      <a href="../index.html" class="admin-nav-link">
+        <span class="nav-icon">🏠</span> View Store
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button onclick="adminLogout()">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <!-- ── Main ───────────────────────────────────────────── -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Dashboard</h1>
+      <div class="admin-topbar-info" id="adminGreeting"></div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🪑</div>
+          <div>
+            <div class="stat-label">Total Products</div>
+            <div class="stat-value" id="statProducts">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div>
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value" id="statOrders">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div>
+            <div class="stat-label">Registered Users</div>
+            <div class="stat-value" id="statUsers">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💰</div>
+          <div>
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value" id="statRevenue">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders -->
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <h2>Recent Orders</h2>
+          <a href="orders.html" class="btn-outline" style="padding:.4rem 1rem; font-size:.82rem">View All</a>
+        </div>
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersBody">
+              <tr><td colspan="7" style="text-align:center; color:var(--text3); padding:2rem">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Products Table -->
+      <div class="admin-section" id="products">
+        <div class="admin-section-header">
+          <h2>All Products</h2>
+          <a href="add-product.html" class="btn-primary" style="padding:.5rem 1.1rem; font-size:.85rem">+ Add Product</a>
+        </div>
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Featured</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsBody">
+              <tr><td colspan="7" style="text-align:center; color:var(--text3); padding:2rem">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+
+</div><!-- /admin-wrapper -->
+
+<script src="../data/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const session = Storage.getSession();
+    if (session) {
+      document.getElementById('adminGreeting').textContent = 'Welcome, ' + session.name;
+    }
+    // Highlight active nav link
+    document.querySelectorAll('.admin-nav-link').forEach(link => {
+      if (link.getAttribute('href') === 'dashboard.html') link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

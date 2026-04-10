@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — FURNI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-inner">
+        <div class="breadcrumb">
+          <a href="index.html">Home</a> /
+          <a href="products.html">Shop</a> /
+          <span id="breadcrumbName">Product</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-wrap">
+      <div id="productDetail">
+        <!-- Injected by products.js -->
+        <div style="text-align:center; padding:4rem; color:var(--text3)">Loading product…</div>
+      </div>
+
+      <div id="relatedProducts"></div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="data/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    // Update breadcrumb after product loads
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const title = document.querySelector('.detail-title');
+        const crumb = document.getElementById('breadcrumbName');
+        if (title && crumb) crumb.textContent = title.textContent;
+      }, 100);
+    });
+  </script>
+</body>
+</html>

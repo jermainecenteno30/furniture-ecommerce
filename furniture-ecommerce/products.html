@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Furniture — FURNI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/products.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main>
+    <div class="page-header">
+      <div class="page-header-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a> / <span>Shop</span></div>
+        <h1>All Furniture</h1>
+      </div>
+    </div>
+
+    <div class="products-layout">
+      <!-- Toolbar: filters + search + sort -->
+      <div class="products-toolbar">
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-category="All">All</button>
+          <button class="filter-btn" data-category="Chairs">Chairs</button>
+          <button class="filter-btn" data-category="Sofas">Sofas</button>
+          <button class="filter-btn" data-category="Tables">Tables</button>
+          <button class="filter-btn" data-category="Beds">Beds</button>
+          <button class="filter-btn" data-category="Storage">Storage</button>
+        </div>
+        <div class="products-controls">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search furniture...">
+          </div>
+          <select id="sortSelect" class="sort-select">
+            <option value="default">Default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="name">Name A–Z</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-count" id="productCount"></div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Products injected by products.js -->
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="data/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — FURNI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div id="navbar-container"></div>
+
+  <main>
+    <div class="auth-wrapper">
+      <div class="auth-card">
+        <div class="auth-logo">
+          <a href="index.html"><span class="logo-icon">◈</span> FURNI</a>
+        </div>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Sign in to your account to continue</p>
+
+        <div class="auth-error" id="authError"></div>
+
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="juan@email.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Your password" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-primary btn-full" style="margin-top:.5rem">Sign In</button>
+        </form>
+
+        <div class="auth-divider">or</div>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="signup.html">Create one</a>
+        </div>
+
+        <!-- Demo credentials -->
+        <div style="margin-top:1.5rem; padding:1rem; background:var(--bg2); border-radius:var(--radius-sm); font-size:.8rem; color:var(--text2);">
+          <strong>Demo credentials:</strong><br>
+          User: <code>juan@email.com</code> / <code>user123</code><br>
+          Admin: <code>admin@furni.com</code> / <code>admin123</code>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="data/products.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

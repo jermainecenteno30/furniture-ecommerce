@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users — FURNI Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="admin-wrapper">
+
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo"><span class="logo-icon">◈</span> FURNI <span style="font-size:.65rem; color:rgba(255,255,255,.4); margin-left:.5rem; font-family:var(--font-body); font-weight:400; letter-spacing:0">Admin</span></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="admin-nav-link"><span class="nav-icon">📊</span> Dashboard</a>
+      <a href="dashboard.html#products" class="admin-nav-link"><span class="nav-icon">🪑</span> Products</a>
+      <a href="add-product.html" class="admin-nav-link"><span class="nav-icon">➕</span> Add Product</a>
+      <a href="orders.html" class="admin-nav-link"><span class="nav-icon">📦</span> Orders</a>
+      <a href="users.html" class="admin-nav-link active"><span class="nav-icon">👥</span> Users</a>
+      <div style="border-top:1px solid rgba(255,255,255,.08); margin:.75rem 0"></div>
+      <a href="../index.html" class="admin-nav-link"><span class="nav-icon">🏠</span> View Store</a>
+    </nav>
+    <div class="sidebar-footer"><button onclick="adminLogout()">🚪 Logout</button></div>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <h1>Users</h1>
+      <div class="admin-topbar-info" id="userCount"></div>
+    </div>
+
+    <div class="admin-content">
+
+      <div class="stats-grid" style="margin-bottom:1.5rem; grid-template-columns: repeat(3,1fr)">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div>
+            <div class="stat-label">Total Users</div>
+            <div class="stat-value" id="statTotalUsers">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🛒</div>
+          <div>
+            <div class="stat-label">Regular Users</div>
+            <div class="stat-value" id="statRegularUsers">—</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔑</div>
+          <div>
+            <div class="stat-label">Admins</div>
+            <div class="stat-value" id="statAdmins">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <h2>All Users</h2>
+          <div style="display:flex; gap:.5rem; align-items:center">
+            <input type="text" id="userSearch" placeholder="Search by name or email…" style="width:220px; padding:.45rem .9rem; font-size:.85rem; border-radius:100px">
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody">
+              <tr><td colspan="6" style="text-align:center; color:var(--text3); padding:2rem">Loading users…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="../data/products.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const users = Storage.getUsers();
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setEl('statTotalUsers',   users.length);
+    setEl('statRegularUsers', users.filter(u => u.role === 'user').length);
+    setEl('statAdmins',       users.filter(u => u.role === 'admin').length);
+
+    // Live search
+    const searchInput = document.getElementById('userSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
+        document.querySelectorAll('#usersBody tr').forEach(row => {
+          row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    }
+  });
+</script>
+</body>
+</html>
